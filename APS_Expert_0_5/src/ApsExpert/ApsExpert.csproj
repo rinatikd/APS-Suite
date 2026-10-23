@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>false</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ApsExpert</RootNamespace>
+    <AssemblyName>ApsExpert</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <!--
+    AutoCAD Managed API DLLs are installed with AutoCAD/ObjectARX and are intentionally
+    not hard-coded to a machine-specific path. Set AUTOCAD_2026_DIR before building.
+  -->
+  <PropertyGroup>
+    <AutoCADDir Condition="'$(AUTOCAD_2026_DIR)' != ''">$(AUTOCAD_2026_DIR)</AutoCADDir>
+    <AutoCADDir Condition="'$(AutoCADDir)' == ''">C:\Program Files\Autodesk\AutoCAD 2026</AutoCADDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="AcCoreMgd">
+      <HintPath>$(AutoCADDir)\AcCoreMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcDbMgd">
+      <HintPath>$(AutoCADDir)\AcDbMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcMgd">
+      <HintPath>$(AutoCADDir)\AcMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\docs\rule-pack\APS_Expert_Design_Criteria_0_5.json" Link="RulePack\APS_Expert_Design_Criteria_0_5.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

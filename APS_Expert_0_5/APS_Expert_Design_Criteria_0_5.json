@@ -1,0 +1,14 @@
+{
+  "Name": "APS Expert Design Criteria (non-normative baseline)",
+  "Version": "0.5",
+  "AddressLine": {
+    "Enabled": true,
+    "MaxDevices": 250,
+    "MaxLengthM": 3000
+  },
+  "DetectorGeometry": {
+    "Enabled": false,
+    "MaxDetectorSpacingM": null,
+    "MaxBoundaryDistanceM": null
+  }
+}

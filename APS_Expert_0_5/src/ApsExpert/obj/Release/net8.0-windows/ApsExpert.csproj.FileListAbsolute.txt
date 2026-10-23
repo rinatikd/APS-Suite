@@ -1,0 +1,4 @@
+c:\Users\rinat\Downloads\APS_Expert_0_5-main\src\ApsExpert\obj\Release\net8.0-windows\ApsExpert.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\rinat\Downloads\APS_Expert_0_5-main\src\ApsExpert\obj\Release\net8.0-windows\ApsExpert.AssemblyInfoInputs.cache
+c:\Users\rinat\Downloads\APS_Expert_0_5-main\src\ApsExpert\obj\Release\net8.0-windows\ApsExpert.AssemblyInfo.cs
+c:\Users\rinat\Downloads\APS_Expert_0_5-main\src\ApsExpert\obj\Release\net8.0-windows\ApsExpert.csproj.CoreCompileInputs.cache
