@@ -1,0 +1,2 @@
+git add aps-revit/APS.extension/lib/aps_core_bridge.py APS-Suite/src/APS.CAD/aps_cad_adapter.py APS-Suite/APS-Suite.sln
+git commit -m "feat: add pyRevit bridge, CAD COM adapter and solution file"
