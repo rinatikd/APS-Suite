@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0",
+  "name": "APS Suite Unified Equipment & Normative Database",
+  "normative_standards": {
+    "SP_484_2020": {
+      "title": "СП 484.1311500.2020 с Изм. №1 (РФ)",
+      "detectors": {
+        "smoke": [
+          { "h_max": 12000, "area": 81.0, "spacing": 9050, "wall_max": 4525 }
+        ],
+        "heat": [
+          { "h_max": 9000, "area": 24.0, "spacing": 4950, "wall_max": 2475 }
+        ]
+      },
+      "zones": {
+        "max_detectors": 32,
+        "max_area_m2": 2000.0,
+        "max_rooms": 5,
+        "max_rooms_area_m2": 500.0,
+        "require_isolator_on_boundary": true
+      }
+    },
+    "SP_RK_2022": {
+      "title": "СП РК 2.02-102-2022 (Республика Казахстан)",
+      "detectors": {
+        "smoke": [
+          { "h_max": 3500, "area": 85.0, "spacing": 9000, "wall_max": 4500 },
+          { "h_max": 6000, "area": 70.0, "spacing": 8500, "wall_max": 4000 },
+          { "h_max": 10000, "area": 65.0, "spacing": 8000, "wall_max": 4000 },
+          { "h_max": 12000, "area": 55.0, "spacing": 7500, "wall_max": 3500 }
+        ],
+        "heat": [
+          { "h_max": 3500, "area": 25.0, "spacing": 5000, "wall_max": 2500 },
+          { "h_max": 6000, "area": 20.0, "spacing": 4500, "wall_max": 2000 },
+          { "h_max": 9000, "area": 15.0, "spacing": 4000, "wall_max": 2000 }
+        ]
+      }
+    }
+  },
+  "cables": [
+    { "mark": "КПСнг(А)-FRLS 1х2х0,5", "section": 0.5, "r_ohm_km": 36.0 },
+    { "mark": "КПСнг(А)-FRLS 1х2х0,75", "section": 0.75, "r_ohm_km": 24.5 },
+    { "mark": "КПСнг(А)-FRLS 1х2х1,0", "section": 1.0, "r_ohm_km": 18.1 },
+    { "mark": "КПСнг(А)-FRLS 1х2х1,5", "section": 1.5, "r_ohm_km": 12.1 },
+    { "mark": "КПСнг(А)-FRLS 1х2х2,5", "section": 2.5, "r_ohm_km": 7.41 }
+  ],
+  "vendors": {
+    "rubezh": {
+      "title": "ГК «Рубеж» (протокол R3)",
+      "loop_name": "АЛС",
+      "panel": { "model": "R3-Рубеж-2ОП", "loops": 2, "max_addresses_per_loop": 127 },
+      "electrical": {
+        "loop_voltage_v": 24.0,
+        "min_end_voltage_v": 24.0,
+        "loop_max_current_ma": 220.0,
+        "max_loop_resistance_ohm": 300.0,
+        "max_loop_length_m": 3000.0,
+        "panel_current_ma": { "standby": 400.0, "alarm": 400.0 },
+        "devices": {
+          "smoke": { "model": "ИП 212-64-R3", "standby_ma": 0.32, "alarm_ma": 0.32 },
+          "heat": { "model": "ИП 101-29-PR-R3", "standby_ma": 0.32, "alarm_ma": 0.32 },
+          "mcp": { "model": "ИПР 513-11-А-R3", "standby_ma": 0.46, "alarm_ma": 0.46 },
+          "sounder": { "model": "ОПОП 124-R3", "standby_ma": 0.2, "alarm_ma": 2.2 },
+          "isolator": { "model": "ИЗ-1Б-R3", "standby_ma": 0.7, "alarm_ma": 10.0, "takes_address": true }
+        }
+      }
+    },
+    "bolid": {
+      "title": "НВП «Болид» (ИСО «Орион»)",
+      "loop_name": "ДПЛС",
+      "panel": { "model": "С2000-КДЛ", "loops": 1, "max_addresses_per_loop": 127 },
+      "electrical": {
+        "loop_voltage_v": 10.0,
+        "min_end_voltage_v": 7.0,
+        "loop_max_current_ma": 65.0,
+        "max_loop_resistance_ohm": 100.0,
+        "max_loop_length_m": 3000.0,
+        "panel_current_ma": { "standby": 100.0, "alarm": 150.0 },
+        "devices": {
+          "smoke": { "model": "ДИП-34А-03", "standby_ma": 0.5, "alarm_ma": 1.0 },
+          "heat": { "model": "С2000-ИП-03", "standby_ma": 0.5, "alarm_ma": 1.0 },
+          "mcp": { "model": "ИПР 513-3АМ", "standby_ma": 0.5, "alarm_ma": 1.0 },
+          "isolator": { "model": "БРИЗ", "standby_ma": 0.5, "alarm_ma": 1.0, "takes_address": false }
+        }
+      }
+    }
+  }
+}

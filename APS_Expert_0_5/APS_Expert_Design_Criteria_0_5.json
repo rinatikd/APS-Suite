@@ -1,14 +1,20 @@
 {
-  "Name": "APS Expert Design Criteria (non-normative baseline)",
-  "Version": "0.5",
+  "Name": "APS Expert Design Criteria (СП 484.1311500.2020 / СП РК 2.02-102-2022)",
+  "Version": "1.0",
   "AddressLine": {
     "Enabled": true,
-    "MaxDevices": 250,
+    "MaxDevices": 127,
     "MaxLengthM": 3000
   },
   "DetectorGeometry": {
-    "Enabled": false,
-    "MaxDetectorSpacingM": null,
-    "MaxBoundaryDistanceM": null
+    "Enabled": true,
+    "MaxDetectorSpacingM": 9.05,
+    "MaxBoundaryDistanceM": 4.525
+  },
+  "Zones": {
+    "MaxDetectorsPerZone": 32,
+    "MaxZoneAreaM2": 2000.0,
+    "MaxRoomsPerZone": 5,
+    "MaxRoomsAreaM2": 500.0
   }
 }

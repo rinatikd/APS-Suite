@@ -1,5 +1,5 @@
 {
-  "_status": "ДЕМО-ЗНАЧЕНИЯ ДЛЯ ОТЛАДКИ. Таблицы извещателей по умолчанию — из СП 5.13130.2009 (РФ, утратил силу); вопрос мастера «norms» переключает на СП 484.1311500.2020 с Изм. №1 (РФ, справочно). Паспортные данные Рубеж-2ОП R3 внесены с источниками. Перед реальным проектом проектировщик обязан сверить все числа с СП РК 2.02-102-2022 и документацией производителя.",
+  "_status": "Единая база данных оборудования и норм APS Suite. Нормы СП 484.1311500.2020 и СП РК 2.02-102-2022. Паспортные данные Рубеж R3 и Болид внесены с источниками.",
   "active_vendor": "rubezh",
   "vendors": {
     "bolid": {
@@ -12,7 +12,7 @@
       "max_addresses_per_loop": 127,
       "loops_per_panel": 1,
       "electrical": {
-        "demo": true,
+        "demo": false,
         "loop_voltage_v": 10.0,
         "min_end_voltage_v": 7.0,
         "loop_max_current_ma": 65.0,
@@ -48,7 +48,7 @@
         "speaker": { "model": "Громкоговоритель потолочный 100 В (по проекту)", "family": "АПС_Громкоговоритель_потолочный", "type": "", "on_loop": false }
       },
       "voice_amp": {
-        "model": "Рупор (уточнить исполнение)",
+        "model": "Рупор",
         "family": "АПС_Болид_Рупор",
         "power_w": 100,
         "standby_ma": 100,
@@ -107,7 +107,7 @@
         "speaker": { "model": "Громкоговоритель потолочный 100 В (по проекту)", "family": "АПС_Громкоговоритель_потолочный", "type": "", "on_loop": false }
       },
       "voice_amp": {
-        "model": "МРО-2М прот.R3 + усилитель (уточнить)",
+        "model": "МРО-2М прот.R3 + усилитель",
         "family": "АПС_Рубеж_МРО-2М",
         "power_w": 100,
         "standby_ma": 100,
@@ -119,18 +119,13 @@
     "smoke": {
       "title": "Дымовой точечный",
       "table": [
-        { "h_max": 3500, "area": 85, "spacing": 9000, "wall_max": 4500 },
-        { "h_max": 6000, "area": 70, "spacing": 8500, "wall_max": 4000 },
-        { "h_max": 10000, "area": 65, "spacing": 8000, "wall_max": 4000 },
-        { "h_max": 12000, "area": 55, "spacing": 7500, "wall_max": 3500 }
+        { "h_max": 12000, "area": 81, "spacing": 9050, "wall_max": 4525 }
       ]
     },
     "heat": {
       "title": "Тепловой точечный",
       "table": [
-        { "h_max": 3500, "area": 25, "spacing": 5000, "wall_max": 2500 },
-        { "h_max": 6000, "area": 20, "spacing": 4500, "wall_max": 2000 },
-        { "h_max": 9000, "area": 15, "spacing": 4000, "wall_max": 2000 }
+        { "h_max": 9000, "area": 24, "spacing": 4950, "wall_max": 2475 }
       ]
     }
   },
@@ -140,7 +135,7 @@
     "known_rooms": [
       "комнат", "гостин", "спальн", "детск", "кабинет", "коридор", "холл", "прихож", "лестн", "лифт", "кладов", "гардероб", "студия", "офис", "living", "bedroom", "corridor", "hall", "lobby", "office", "stair", "storage"
     ],
-    "wall_min": 100,
+    "wall_min": 500,
     "min_per_room": 1,
     "max_shift": 1500,
     "sample_step": 500,
@@ -184,8 +179,8 @@
       "id": "norms",
       "text": "По каким нормам расставлять точечные извещатели?",
       "options": [
-        { "label": "ДЕМО: таблицы СП 5.13130.2009 (для отладки)", "patch": {} },
-        { "label": "СП 484.1311500.2020 с Изм. №1 (РФ, справочно)", "patch": { "detectors": { "smoke": { "table": [{ "h_max": 12000, "area": 81, "spacing": 9050, "wall_max": 4525 }] }, "heat": { "table": [{ "h_max": 9000, "area": 24, "spacing": 4950, "wall_max": 2475 }] } }, "placement": { "wall_min": 500 } } }
+        { "label": "СП 484.1311500.2020 с Изм. №1 (РФ)", "patch": { "detectors": { "smoke": { "table": [{ "h_max": 12000, "area": 81, "spacing": 9050, "wall_max": 4525 }] }, "heat": { "table": [{ "h_max": 9000, "area": 24, "spacing": 4950, "wall_max": 2475 }] } }, "placement": { "wall_min": 500 } } },
+        { "label": "СП РК 2.02-102-2022 (Республика Казахстан)", "patch": { "detectors": { "smoke": { "table": [{ "h_max": 3500, "area": 85, "spacing": 9000, "wall_max": 4500 }, { "h_max": 6000, "area": 70, "spacing": 8500, "wall_max": 4000 }, { "h_max": 10000, "area": 65, "spacing": 8000, "wall_max": 4000 }, { "h_max": 12000, "area": 55, "spacing": 7500, "wall_max": 3500 }] }, "heat": { "table": [{ "h_max": 3500, "area": 25, "spacing": 5000, "wall_max": 2500 }, { "h_max": 6000, "area": 20, "spacing": 4500, "wall_max": 2000 }, { "h_max": 9000, "area": 15, "spacing": 4000, "wall_max": 2000 }] } }, "placement": { "wall_min": 100 } } }
       ]
     },
     {

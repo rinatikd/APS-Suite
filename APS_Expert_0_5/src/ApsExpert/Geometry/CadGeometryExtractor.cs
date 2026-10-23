@@ -2,7 +2,7 @@ using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using ApsExpert.Domain;
-using System.Globalization;
+using APS.Core.Geometry;
 
 namespace ApsExpert.Geometry;
 
@@ -27,9 +27,13 @@ public sealed class CadGeometryExtractor
                 var pl = tr.GetObject(id, OpenMode.ForRead) as Polyline;
                 if (pl != null && pl.Closed && pl.NumberOfVertices >= 3 && pl.Area > 1.0)
                 {
-                    var points = new List<Point2d>();
+                    var points = new List<Point2D>();
                     for (var i = 0; i < pl.NumberOfVertices; i++)
-                        points.Add(pl.GetPoint2dAt(i));
+                    {
+                        var p = pl.GetPoint2dAt(i);
+                        points.Add(new Point2D(p.X, p.Y));
+                    }
+
                     result.CandidateRooms.Add(new RoomGeometry
                     {
                         ObjectId = id,
@@ -64,7 +68,6 @@ public sealed class CadGeometryExtractor
             }
         }
 
-        // Prefer room-like layers; otherwise retain all candidates but mark the fallback.
         if (result.CandidateRooms.Any(x => x.IsRoomLayer))
             result.Rooms.AddRange(result.CandidateRooms.Where(x => x.IsRoomLayer));
         else
@@ -75,10 +78,11 @@ public sealed class CadGeometryExtractor
 
         foreach (var d in result.Detectors)
         {
-            var room = result.Rooms.FirstOrDefault(r => PointInPolygon.Contains(new Point2d(d.Position.X, d.Position.Y), r.Boundary));
+            var p = new Point2D(d.Position.X, d.Position.Y);
+            var room = result.Rooms.FirstOrDefault(r => Geometry2DUtils.PointInPolygon(p, r.Boundary));
             d.RoomObjectId = room?.ObjectId;
             d.RoomAreaM2 = room?.AreaM2;
-            d.DistanceToRoomBoundaryM = room == null ? null : DistanceToPolygon(new Point2d(d.Position.X, d.Position.Y), room.Boundary);
+            d.DistanceToRoomBoundaryM = room == null ? null : Geometry2DUtils.DistanceToEdges(p, room.Boundary, null);
         }
 
         tr.Commit();
@@ -132,7 +136,7 @@ public sealed class CadGeometryExtractor
         return DetectorType.Unknown;
     }
 
-    private static Point2d TryCentroid(IReadOnlyList<Point2d> p)
+    private static Point2D TryCentroid(IReadOnlyList<Point2D> p)
     {
         double a2 = 0, cx = 0, cy = 0;
         for (int i = 0, j = p.Count - 1; i < p.Count; j = i++)
@@ -143,28 +147,7 @@ public sealed class CadGeometryExtractor
             cy += (p[j].Y + p[i].Y) * cross;
         }
         if (Math.Abs(a2) < 1e-9) return p[0];
-        return new Point2d(cx / (3 * a2), cy / (3 * a2));
-    }
-
-    private static double DistanceToPolygon(Point2d p, IReadOnlyList<Point2d> poly)
-    {
-        double min = double.MaxValue;
-        for (int i = 0; i < poly.Count; i++)
-        {
-            var a = poly[i];
-            var b = poly[(i + 1) % poly.Count];
-            min = Math.Min(min, DistancePointSegment(p, a, b));
-        }
-        return min;
-    }
-
-    private static double DistancePointSegment(Point2d p, Point2d a, Point2d b)
-    {
-        var dx = b.X - a.X; var dy = b.Y - a.Y;
-        if (Math.Abs(dx) < 1e-12 && Math.Abs(dy) < 1e-12) return p.GetDistanceTo(a);
-        var t = ((p.X - a.X) * dx + (p.Y - a.Y) * dy) / (dx * dx + dy * dy);
-        t = Math.Max(0, Math.Min(1, t));
-        return p.GetDistanceTo(new Point2d(a.X + t * dx, a.Y + t * dy));
+        return new Point2D(cx / (3 * a2), cy / (3 * a2));
     }
 }
 
@@ -184,8 +167,8 @@ public sealed class RoomGeometry
     public string Layer { get; init; } = "";
     public bool IsRoomLayer { get; init; }
     public double AreaM2 { get; init; }
-    public Point2d Centroid { get; init; }
-    public List<Point2d> Boundary { get; init; } = [];
+    public Point2D Centroid { get; init; }
+    public List<Point2D> Boundary { get; init; } = [];
 }
 
 public sealed class DetectorGeometry

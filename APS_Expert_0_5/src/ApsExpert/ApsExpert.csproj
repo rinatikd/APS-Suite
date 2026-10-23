@@ -33,8 +33,13 @@
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="..\..\docs\rule-pack\APS_Expert_Design_Criteria_0_5.json" Link="RulePack\APS_Expert_Design_Criteria_0_5.json" CopyToOutputDirectory="PreserveNewest" />
+    <ProjectReference Include="..\..\..\APS-Suite\src\APS.Core\APS.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\APS-Suite\database\aps_equipment_db.json" Link="RulePack\aps_equipment_db.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
