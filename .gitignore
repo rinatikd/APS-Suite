@@ -1,1 +1,22 @@
-.aider*
+﻿# Visual Studio / .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Python / COM
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# CAD
+*.bak
+*.dwl
+*.dwl2
+
+# Local test outputs
+test_cad.py
