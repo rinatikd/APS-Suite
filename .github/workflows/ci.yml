@@ -1,4 +1,4 @@
-name: CI Build & Test
+﻿name: CI Build & Test
 
 on:
   push:
@@ -11,11 +11,17 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
-      - name: Build Solution
-        run: dotnet build APS-Suite/APS-Suite.sln -c Release
-      - name: Run Unit Tests
-        run: dotnet test APS-Suite/APS-Suite.sln -c Release --no-build --verbosity normal
+          dotnet-version: '8.0.x'
+
+      - name: Build APS.Core
+        run: dotnet build APS-Suite/src/APS.Core/APS.Core.csproj -c Release
+
+      - name: Build APS.Core.Tests
+        run: dotnet build APS-Suite/tests/APS.Core.Tests/APS.Core.Tests.csproj -c Release
+
+      - name: Run SP 484 & RIP Unit Tests
+        run: dotnet test APS-Suite/tests/APS.Core.Tests/APS.Core.Tests.csproj -c Release --no-build --verbosity normal
