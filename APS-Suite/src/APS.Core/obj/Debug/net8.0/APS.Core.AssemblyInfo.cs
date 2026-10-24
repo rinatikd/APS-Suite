@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APS.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f5cc81877f2772e30915feddd0c8343c2ab7638")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4619c584f1cd4ac944aed7f97f0585fddc439657")]
 [assembly: System.Reflection.AssemblyProductAttribute("APS.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APS.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

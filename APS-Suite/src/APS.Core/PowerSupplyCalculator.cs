@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace APS.Core;
 
@@ -10,7 +12,7 @@ public static class PowerSupplyCalculator
 
     /// <summary>
     /// Расчет требуемой емкости АКБ источника питания по СП 484.1311500.2020 и ГОСТ Р 53325.
-    /// Формула: C = (I_деж * T_деж + I_пож * T_пож) * K_зап
+    /// C = (I_деж * T_деж + I_пож * T_пож) * K_зап
     /// </summary>
     public static double CalculateRequiredCapacityAh(
         double standbyCurrentA,
@@ -30,5 +32,26 @@ public static class PowerSupplyCalculator
 
         double rawCapacity = (standbyCurrentA * standbyHours) + (alarmCurrentA * alarmHours);
         return Math.Round(rawCapacity * agingFactor, 2);
+    }
+
+    /// <summary>
+    /// Автоматический подбор оптимального РИП по требуемой емкости и пиковому току нагрузки.
+    /// </summary>
+    public static EquipmentItem? SelectOptimalPowerSupply(
+        IEnumerable<EquipmentItem> catalog,
+        double requiredCapacityAh,
+        double maxAlarmCurrentA)
+    {
+        if (catalog == null)
+            throw new ArgumentNullException(nameof(catalog));
+
+        return catalog
+            .Where(e => string.Equals(e.Type, "power_supply", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(e.Type, "rip", StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.MaxOutputCurrentA >= maxAlarmCurrentA)
+            .Where(e => e.BatteryCapacityAh >= requiredCapacityAh)
+            .OrderBy(e => e.BatteryCapacityAh)
+            .ThenBy(e => e.MaxOutputCurrentA)
+            .FirstOrDefault();
     }
 }

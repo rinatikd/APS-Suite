@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 using APS.Core;
 
@@ -36,5 +37,22 @@ public class BatteryCapacityTests
         {
             PowerSupplyCalculator.CalculateRequiredCapacityAh(-0.1, 1.0);
         });
+    }
+
+    [Fact]
+    public void SelectOptimalPowerSupply_SelectsCorrectModel()
+    {
+        var testCatalog = new List<EquipmentItem>
+        {
+            new() { Id = "rip_1", Type = "power_supply", Model = "РИП-12 исп.01", MaxOutputCurrentA = 1.0, BatteryCapacityAh = 7.0 },
+            new() { Id = "rip_2", Type = "power_supply", Model = "РИП-12 исп.05", MaxOutputCurrentA = 3.0, BatteryCapacityAh = 17.0 },
+            new() { Id = "rip_3", Type = "power_supply", Model = "РИП-12 исп.06", MaxOutputCurrentA = 4.0, BatteryCapacityAh = 40.0 }
+        };
+
+        // Требуется 9.0 А*ч и пиковый ток 1.5 А
+        var selected = PowerSupplyCalculator.SelectOptimalPowerSupply(testCatalog, 9.0, 1.5);
+
+        Assert.NotNull(selected);
+        Assert.Equal("РИП-12 исп.05", selected.Model);
     }
 }
