@@ -20,3 +20,6 @@ venv/
 
 # Local test outputs
 test_cad.py
+
+.aider*
+

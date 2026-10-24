@@ -8,3 +8,4 @@ C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\n
 C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\netstandard2.0\APS.Core.csproj.CoreCompileInputs.cache
 C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\netstandard2.0\APS.Core.dll
 C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\netstandard2.0\APS.Core.pdb
+C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\netstandard2.0\APS.Core.sourcelink.json

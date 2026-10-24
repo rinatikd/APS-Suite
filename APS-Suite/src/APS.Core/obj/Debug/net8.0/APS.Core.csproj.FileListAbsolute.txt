@@ -9,3 +9,4 @@ C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\n
 C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\net8.0\refint\APS.Core.dll
 C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\net8.0\APS.Core.pdb
 C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\net8.0\ref\APS.Core.dll
+C:\Users\rinat\Downloads\Aether\APS-Workspace\APS-Suite\src\APS.Core\obj\Debug\net8.0\APS.Core.sourcelink.json

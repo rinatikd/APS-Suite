@@ -1,23 +1,21 @@
-﻿name: CI Build Verification
+name: CI Build & Test
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ master, main ]
 
 jobs:
-  build-core:
+  build-and-test:
     runs-on: windows-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup .NET SDK
+      - uses: actions/checkout@v4
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-
-      - name: Build APS.Core
-        run: dotnet build APS-Suite/src/APS.Core/APS.Core.csproj -c Release
+          dotnet-version: 8.0.x
+      - name: Build Solution
+        run: dotnet build APS-Suite/APS-Suite.sln -c Release
+      - name: Run Unit Tests
+        run: dotnet test APS-Suite/APS-Suite.sln -c Release --no-build --verbosity normal
